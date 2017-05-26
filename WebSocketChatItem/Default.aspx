@@ -7,6 +7,7 @@
         <h1>Your Ip：<%= Ip.ToString() %></h1>
         <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
         <p><a  class="btn btn-primary btn-lg"  id="caption"  href="javascript:;">Learn more &raquo;</a></p>
+        <img src="/PicturesHandler.ashx" alt="Alternate Text" />
        <button id="send" disabled="disabled">send</button> <input type="Text" name="name" value="" id="txt" />
     </div>
 

@@ -9,7 +9,7 @@ namespace WebSocketChatItem
 {
     public partial class _Default : Page
     {
-      public  string Ip ;
+      public string Ip ;
         protected void Page_Load(object sender, EventArgs e)
         {
             var x = Session;

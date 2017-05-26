@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
+using ThoughtWorks.QRCode.Codec;
 
 namespace WebApplication1
 {
@@ -15,10 +16,24 @@ namespace WebApplication1
         /// <summary>  
         /// 批量生成二维码图片  
         /// </summary>  
-        private void Create_CodeImages()
+        private void Create_CodeImages(int imgSize)
         {
             try
             {
+                DataSet myDataSet = new DataSet();
+                DataTable dt = new DataTable("PictureList");
+                dt.Columns.AddRange(new DataColumn[] { new DataColumn("PictureName", typeof(string)), new DataColumn("DataUrl", typeof(string)) });
+                {
+                    DataRow drTemp1 = dt.NewRow();
+                    drTemp1["PictureName"] = "BaiDu";
+                    drTemp1["DataUrl"] = "http://www.baidu.com";
+                    DataRow drTemp2 = dt.NewRow();
+                    drTemp2["PictureName"] = "360";
+                    drTemp2["DataUrl"] = "http://www.360.com";
+                }
+
+
+                myDataSet.Tables.Add(dt);
                 if (myDataSet != null)
                 {
                     if (myDataSet.Tables[0].Rows.Count > 0)
@@ -27,7 +42,7 @@ namespace WebApplication1
                         DeleteDir(currentPath);
                         foreach (DataRow dr in myDataSet.Tables[0].Rows)
                         {
-                            if (dr[2] != null)
+                            if (dr[1] != null)
                             {
                                 //生成图片  
                                 Bitmap image = Create_ImgCode(dr[2].ToString(), imgSize);
@@ -44,14 +59,14 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "错误！", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show(ex.ToString(), "错误！", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
         }
 
 
         //程序路径  
-        readonly string currentPath = Application.StartupPath + @"\BarCode_Images";
+        readonly string currentPath = System.Configuration.ConfigurationManager.AppSettings["picPath"];  //Application.StartupPath + @"\BarCode_Images";
 
         /// <summary>  
         /// 保存图片  
