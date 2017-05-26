@@ -65,6 +65,9 @@ namespace WebApplication1
                     throw new InvalidOperationException("Anti-XSRF 令牌验证失败。");
                 }
             }
+
+
+
         }
 
         protected void Page_Load(object sender, EventArgs e)
